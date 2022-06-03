@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% set title = "My SuperBook Store" %}
+{% block title title %}
+
+{% block body %}
+	<h1>{{ title }}</h1>
+	<button class="btn btn-primary">
+		<a href="{{ path('book:create') }}">Ajouter un livre</a>
+	</button>
+	<button class="btn btn-primary">
+		<a href="{{ path('book:index') }}">Liste des livres</a>
+	</button>
+	<section>
+		<h2>Bienvenue sur {{ title }}</h2>
+		<p>Retrouver tous nos livres:
+			<button class="btn btn-primary">
+				<a href="{{ path('book:index') }}">Liste des livres</a>
+			</button>
+		</p>
+	</section>
+{% endblock %}
