@@ -4,18 +4,38 @@
 
 {% block body %}
 	<h1>{{ title }}</h1>
-	<button class="btn btn-primary">
-		<a href="{{ path('book:create') }}">Ajouter un livre</a>
-	</button>
-	<button class="btn btn-primary">
-		<a href="{{ path('book:index') }}">Liste des livres</a>
-	</button>
+	<section>
+		<button class="btn btn-primary">
+			<a href="{{ path('app_book_new') }}">Ajouter un livre</a>
+		</button>
+		<button class="btn btn-primary">
+			<a href="{{ path('app_book_index') }}">Liste des livres</a>
+		</button>
+	</section>
+	<section>
+		<button class="btn btn-primary">
+			<a href="{{ path('app_author_new') }}">Ajouter un auteur</a>
+		</button>
+		<button class="btn btn-primary">
+			<a href="{{ path('app_author_index') }}">Liste des auteurs</a>
+		</button>
+	</section>
+	<section>
+		<button class="btn btn-primary">
+			<a href="{{ path('app_category_new') }}">Ajouter un categorie</a>
+		</button>
+		<button class="btn btn-primary">
+			<a href="{{ path('app_category_index') }}">Liste des categories</a>
+		</button>
+	</section>
 	<section>
 		<h2>Bienvenue sur {{ title }}</h2>
 		<p>Retrouver tous nos livres:
 			<button class="btn btn-primary">
-				<a href="{{ path('book:index') }}">Liste des livres</a>
+				<a href="{{ path('app_book_index') }}">Liste des livres</a>
 			</button>
 		</p>
 	</section>
+
+	<div data-controller="hello"></div>
 {% endblock %}

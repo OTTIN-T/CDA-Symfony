@@ -15,8 +15,7 @@ class CategoryType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('color')
-            ->add('illustration')
-        ;
+            ->add('illustration');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
