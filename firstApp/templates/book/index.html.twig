@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% set title = "Liste des livres" %}
+{% block title title %}
+
+{% block body %}
+	<h2>{{ title }}</h2>
+	<button class="btn btn-primary">
+		<a style="color: white" href="{{ path('book:create')}}">Ajouter un livre</a>
+	</button>
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Titre</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for book in books %}
+				<tr>
+					<td>{{ book.id }}</td>
+					<td>{{ book.title }}</td>
+					<td>
+						<a href="{{ url('book:show', {id: book.id}) }}">Show
+						</a>
+						<a href="{{ url('book:edit', {id: book.id}) }}">Edit</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

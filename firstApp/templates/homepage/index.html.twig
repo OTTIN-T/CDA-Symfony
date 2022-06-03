@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomepageController!
+{% endblock %}
+
+{% block body %}
+	<h2>Filtres Twig</h2>
+
+	<div>
+		Var "now" : {{ now | date('Y-m-d H:i:s') }}
+	</div>
+	<div> {{ html | raw }}
+	</div>
+
+	<div>
+		{% set json = array | json_encode() %} {{ json }}
+	</div>
+
+	<hr>
+
+
+	<div>
+		<h3>Boucle sur JSON (filtre)</h3>
+		{% for key, value in json | json_decode() %}
+			key: {{ key }}<br>
+			value: {{ value }}<br>
+		{% endfor %}
+	</div>
+	<div>
+		<h3>Boucle sur JSON (function)</h3>
+		{% for key, value in json_decode(json) %}
+			key: {{ key }}<br>
+			value: {{ value }}<br>
+		{% endfor %}
+	</div>
+
+
+	<hr>
+
+	<div>
+		{% if "abc" is isString %}
+			c'est une chaine.
+		{% else %}
+			ce n'est pas une chaine.
+		{% endif %}
+	</div>
+
+	<div>
+		{% if 123 is isString %}
+			c'est une chaine.
+		{% else %}
+			ce n'est pas une chaine.
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% set title = "Livre:" ~ book.title %}
+{% block title %} {{ title }}
+	- {{ parent()}}
+{% endblock %}
+
+{% block body %}
+	<h2>{{ title }}</h2>
+	<div>
+		<strong>ID</strong> {{ book.id }}
+	</div>
+	<div>
+		<strong>Titre</strong> {{ book.title }}
+	</div>
+	<div>
+		<strong>Couverture</strong> {{ book.cover }}
+	</div>
+	<div>
+		<strong>Prix</strong> {{ book.price }}
+		€
+	</div>
+	<div>
+		<strong>Description</strong>
+		{% if book.description %} {{ book.description }}
+		{% endif %}
+		{% if book.description is same as(null) %}
+			Pas de description
+		{% endif %}
+	</div>
+	<button>
+		<a href="{{ path('book:edit', {id: book.id})}}">Edit</a>
+	</button>
+	<button>
+		<a href="{{ path('book:delete', {id: book.id})}}">Supprimer</a>
+	</button>
+{% endblock %}

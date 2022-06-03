@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% set title = "Supprimer le livre: " ~ book.title %}
+{% block title %} {{ title }}
+	- {{ parent()}}
+{% endblock %}
+{% block body %}
+	<h2>{{ title }}</h2>
+	<form method="post" action="{{ app.request.uri }}">
+		<input type="hidden" name="_method" value="DELETE">
+
+		<strong>Etes vous sur de vouloir supprimer le livre "{{ book.title}}" ?</strong>
+
+		<a href="{{ path('book:show', {id: book.id}) }}" class="btn btn-primary">Non</a>
+		<button type="submit" class="btn btn-danger">Oui</button>
+	</form>
+{% endblock %}

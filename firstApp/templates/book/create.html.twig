@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% set title = "Ajouter un livre " %}
+{% block title %} {{ title }}
+	- {{ parent() }}
+{% endblock %}
+{% block body %}
+
+	<style>
+		.required::after {
+			content: "*";
+			color: red;
+		}
+	</style>
+
+	<h2> {{ title }}
+	</h2>
+	<div>
+		Formulaire de création du livre:
+		{% include "book/_form.html.twig" %}
+	</div>
+{% endblock %}

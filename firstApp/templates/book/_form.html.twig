@@ -1,0 +1,17 @@
+{# Start le form #} {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+{# CSRF Token #} {{ form_widget(form._token) }}
+{# Title #}
+<div class="form-group"> {{ form_label(form.title) }} {{ form_widget(form.title) }} {{ form_errors(form.title) }} {{ form_help(form.title) }}
+</div>
+{# Cover #}
+<div class="form-group"> {{ form_label(form.cover) }} {{ form_widget(form.cover) }} {{ form_errors(form.cover) }} {{ form_help(form.cover) }}
+</div>
+{# Description #}
+<div class="form-group"> {{ form_label(form.description) }} {{ form_widget(form.description) }} {{ form_errors(form.description) }} {{ form_help(form.description) }}
+</div>
+{# Price #}
+<div class="form-group"> {{ form_label(form.price) }} {{ form_widget(form.price) }} {{ form_errors(form.price) }} {{ form_help(form.price) }}
+</div>
+<button type="submit"> {{ btn_label | default('Ajouter le livre')}}
+</button>
+{# End le form #} {{ form_end(form, {'render_rest': false }) }}
