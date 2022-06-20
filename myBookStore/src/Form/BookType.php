@@ -2,12 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,11 +23,21 @@ class BookType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('price', IntegerType::class)
-            ->add('cover', FileType::class)
+            ->add('price', MoneyType::class)
+            ->add('cover', FileType::class, [
+                'required' => false,
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+            ])
+            ->add('authors', CollectionType::class, [
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'class' => Author::class,
+                    'choice_label' => 'fullname'
+                ],
+                'allow_add' => true,
             ]);
     }
 

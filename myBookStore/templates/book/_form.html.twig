@@ -1,4 +1,43 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{# Start le form #} {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+{# CSRF Token #} {{ form_widget(form._token) }}
+{# Title #}
+<div class="form-group"> {{ form_label(form.title) }} {{ form_widget(form.title) }} {{ form_errors(form.title) }} {{ form_help(form.title) }}
+</div>
+{# Cover #}
+<div class="form-group"> {{ form_label(form.cover) }} {{ form_widget(form.cover) }} {{ form_errors(form.cover) }} {{ form_help(form.cover) }}
+</div>
+{# Description #}
+<div class="form-group"> {{ form_label(form.description) }} {{ form_widget(form.description) }} {{ form_errors(form.description) }} {{ form_help(form.description) }}
+</div>
+{# Price #}
+<div class="form-group"> {{ form_label(form.price) }} {{ form_widget(form.price) }} {{ form_errors(form.price) }} {{ form_help(form.price) }}
+</div>
+
+{# Category #}
+<div class="form-group"> {{ form_label(form.category) }} {{ form_widget(form.category) }} {{ form_errors(form.category) }} {{ form_help(form.category) }}
+</div>
+
+{# Author #}
+{# <div class="form-group"> {{ form_label(form.authors) }} {{ form_widget(form.authors) }} {{ form_errors(form.authors) }} {{ form_help(form.authors) }}
+</div> #}
+
+<div
+	data-controller="collection" class="form-group mt-5 mb-5">
+	{# List author #}
+	<div data-collection-id></div>
+	{# Template field author #}
+	<template data-collection="#authors-collection">
+		<div class="input-group"> {{ form_widget(form.authors.vars.prototype) }}
+			<div class="input-group-append">
+				<button type="button">&times;</button>
+			</div>
+		</div>
+	</template>
+	<button type="button" class="btn btn-secondary" data-action="click->collection#getTemplate">
+		Ajouter un auteur
+	</button>
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+
+{# End le form #} {{ form_end(form, {'render_rest': false }) }}
