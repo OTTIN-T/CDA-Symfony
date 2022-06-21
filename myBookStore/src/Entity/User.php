@@ -214,9 +214,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\PrePersist
      */
-    public function setRegistrationAt(\DateTimeInterface $registrationAt): self
+    public function setRegistrationAt(): self
     {
-        $this->registrationAt = $registrationAt;
+        $this->registrationAt = new \DateTime();
 
         return $this;
     }
@@ -301,7 +301,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\PrePersist
      */
-    public function setScreenname(string $screenname): self
+    public function setScreenname(): self
     {
         $this->screenname = $this->firstname;
         $this->screenname .= " ";
