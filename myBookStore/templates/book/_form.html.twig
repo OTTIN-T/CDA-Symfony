@@ -1,43 +1,57 @@
-{# Start le form #} {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-{# CSRF Token #} {{ form_widget(form._token) }}
-{# Title #}
-<div class="form-group"> {{ form_label(form.title) }} {{ form_widget(form.title) }} {{ form_errors(form.title) }} {{ form_help(form.title) }}
-</div>
-{# Cover #}
-<div class="form-group"> {{ form_label(form.cover) }} {{ form_widget(form.cover) }} {{ form_errors(form.cover) }} {{ form_help(form.cover) }}
-</div>
-{# Description #}
-<div class="form-group"> {{ form_label(form.description) }} {{ form_widget(form.description) }} {{ form_errors(form.description) }} {{ form_help(form.description) }}
-</div>
-{# Price #}
-<div class="form-group"> {{ form_label(form.price) }} {{ form_widget(form.price) }} {{ form_errors(form.price) }} {{ form_help(form.price) }}
-</div>
+<div class="container"> {{ form_start(form, {'attr': {'novalidate': "novalidate"}}) }} {{ form_widget(form._token) }}
 
-{# Category #}
-<div class="form-group"> {{ form_label(form.category) }} {{ form_widget(form.category) }} {{ form_errors(form.category) }} {{ form_help(form.category) }}
-</div>
+	{# Title #}
+	<div class="form-group"> {{ form_label(form.title) }} {{ form_widget(form.title) }} {{ form_errors(form.title) }} {{ form_help(form.title) }}
+	</div>
 
-{# Author #}
-{# <div class="form-group"> {{ form_label(form.authors) }} {{ form_widget(form.authors) }} {{ form_errors(form.authors) }} {{ form_help(form.authors) }}
-</div> #}
+	{# Description #}
+	<div class="form-group"> {{ form_label(form.description) }} {{ form_widget(form.description) }} {{ form_errors(form.description) }} {{ form_help(form.description) }}
+	</div>
 
-<div
-	data-controller="collection" class="form-group mt-5 mb-5">
-	{# List author #}
-	<div data-collection-id></div>
-	{# Template field author #}
-	<template data-collection="#authors-collection">
-		<div class="input-group"> {{ form_widget(form.authors.vars.prototype) }}
-			<div class="input-group-append">
-				<button type="button">&times;</button>
-			</div>
+	{# Price #}
+	<div class="form-group"> {{ form_label(form.price) }} {{ form_widget(form.price) }} {{ form_errors(form.price) }} {{ form_help(form.price) }}
+	</div>
+
+	{# Cover #}
+	<div class="form-group"> {{ form_label(form.cover) }} {{ form_widget(form.cover) }} {{ form_errors(form.cover) }} {{ form_help(form.cover) }}
+	</div>
+
+	{# Category #}
+	<div class="form-group"> {{ form_label(form.category) }} {{ form_widget(form.category) }} {{ form_errors(form.category) }} {{ form_help(form.category) }}
+	</div>
+
+	{# Authors #}
+	{# <div class="form-group"> {{ form_label(form.authors) }} {{ form_widget(form.authors) }} {{ form_errors(form.authors) }} {{ form_help(form.authors) }}
+	    </div> #}
+
+	{# Collection of "Authors" #}
+		<div
+		data-controller="collection" {# The trigger of "collection" controller #} data-counter="{{ form.authors | length }}" {# The items counter #} data-default-items="1" {# The value of new items on collection init #} data-required-items="1" {# The value of minimum items required #} class="form-group mt-5 mb-5"> {# The collection items container #}
+		<div data-collection-container>
+
+			{% for field in form.authors %}
+				<div class="input-group" data-field-serial="{{ loop.index0 }}"> {{ form_widget(field) }}
+					<button type="button" class="btn btn-danger btn-sm" data-target="{{ loop.index0 }}" data-action="click->collection#remove">
+						&times;
+					</button>
+				</div>
+			{% endfor %}
+
 		</div>
-	</template>
-	<button type="button" class="btn btn-secondary" data-action="click->collection#getTemplate">
-		Ajouter un auteur
-	</button>
+
+		{# Create new item button #}
+		<button type="button" class="btn btn-success btn-sm" data-action="click->collection#add">+ ajouter une catégorie</button>
+
+		{# New item template #}
+		<template>
+			<div class="input-group"> {{ form_widget(form.authors.vars.prototype) }}
+				<div class="input-group-append">
+					<button type="button" aria-label="Delete" data-target="__name__" data-action="click->collection#remove">&times;</button>
+				</div>
+			</div>
+		</template>
+
+	</div>
+
+	<button class="btn btn-primary">{{ button_label|default('Save') }}</button> {{ form_end(form) }}
 </div>
-
-<button class="btn">{{ button_label|default('Save') }}</button>
-
-{# End le form #} {{ form_end(form, {'render_rest': false }) }}

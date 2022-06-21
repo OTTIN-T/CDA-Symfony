@@ -38,6 +38,7 @@ class BookType extends AbstractType
                     'choice_label' => 'fullname'
                 ],
                 'allow_add' => true,
+                'allow_delete' => true,
             ]);
     }
 
@@ -45,6 +46,6 @@ class BookType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Book::class,
-        ]);
+    ]);
     }
 }

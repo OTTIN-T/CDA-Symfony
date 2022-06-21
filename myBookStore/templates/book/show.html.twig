@@ -27,6 +27,13 @@
                 <th>Cover</th>
                 <td>{{ book.cover }}</td>
             </tr>
+        <th>Authors</th>
+            <td>
+                {% for author in book.authors %}
+                <div><a href="{{ path('app_author_show', {id: author.id}) }}">{{ author.fullname }}</a></div>
+                {% endfor %}
+            </td>
+            </tr>
             <tr>
                 <th>CreatedAt</th>
                 <td>{{ book.createdAt ? book.createdAt|date('Y-m-d H:i:s') : '' }}</td>
