@@ -6,17 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomepageController extends AbstractController
+class ProfileController extends AbstractController
 {
     /**
-     * @Route("/homepage", name="app_homepage")
+     * @Route("/profile", name="app_profile")
      */
     public function index(): Response
     {
-
-        // $this->getParameter('available_locales');
-        return $this->render('homepage/index.html.twig', [
-            'controller_name' => 'HomepageController',
+        return $this->render('profile/index.html.twig', [
+            'controller_name' => 'ProfileController',
         ]);
     }
 }

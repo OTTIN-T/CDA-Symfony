@@ -29,7 +29,7 @@
 		</button>
 	</section>
 	<section>
-		<h2>Bienvenue sur {{ title }}</h2>
+		<h2>Bienvenue sur {{ title }} {{"welcome" | trans()}}</h2>
 		<p>Retrouver tous nos livres:
 			<button class="btn btn-primary">
 				<a href="{{ path('app_book_index') }}">Liste des livres</a>

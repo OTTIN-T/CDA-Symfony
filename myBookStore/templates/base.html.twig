@@ -16,14 +16,45 @@
 		{% endblock %}
 	</head>
 	<body>
-		<head>
-			<nav>
-				<a href="{{ path('app_homepage')}}">Home</a>
-				<a href="{{ path('app_book_index')}}">Book</a>
-				<a href="{{ path('app_author_index')}}">Author</a>
-				<a href="{{ path('app_category_index')}}">Category</a>
-			</nav>
-		</head>
+		<header>
+			<div class="container">
+				<div class="d-flex">
+					<nav>
+						<a href="{{ path('app_homepage') }}">Accueil</a>
+						<a href="{{ path('app_book_index') }}">Nos Livres</a>
+						<a href="{{ path('app_author_index') }}">Les auteurs</a>
+						<a href="{{ path('app_category_index') }}">Les catégories</a>
+					</nav>
+
+					{# User Nav #}
+					<nav class="ms-auto">
+						{% if app.user %}
+							<a href="{{ path('app_profile') }}">Mon profil</a>
+							<a href="{{ path('app_logout') }}">Deconnexion</a>
+						{% else %}
+							<a href="{{ path('app_register') }}">Inscription</a>
+							<a href="{{ path('app_login') }}">Connexion</a>
+						{% endif %}
+					</nav>
+				</div>
+			</div>
+		</header>
+		<main>
+			<section>
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success"> {{ message }}
+					</div>
+				{% endfor %}
+			</section>
+		</main>
 		{% block body %}{% endblock %}
+		<footer> {{ locales_switch() }}
+
+			<ul>
+				{% for locale_code in available_locales %}
+					<li>{{locale_code}}</li>
+				{% endfor %}
+			</ul>
+		</footer>
 	</body>
-</html>
+</html></body></html>

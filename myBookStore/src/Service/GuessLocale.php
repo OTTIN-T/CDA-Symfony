@@ -7,9 +7,9 @@ class GuessLocale
      public function fromBrowser(): ?string
      {
 
-          $$http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-          if (empty($$http_accept_language)) return null;
-          $http_accept_language = explode(",", $$http_accept_language);
+          $http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+          if (empty($http_accept_language)) return null;
+          $http_accept_language = explode(",", $http_accept_language);
 
           foreach ($http_accept_language as $index => $value) {
                $value = explode(";", $value);
