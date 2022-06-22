@@ -1,41 +1,44 @@
 {% extends 'base.html.twig' %}
+{% set domain = 'author' %}
+{% set title = "index.title" | trans({}, domain) %}
 
-{% block title %}Author index{% endblock %}
+{% block title %} {{ title }}
+{% endblock %}
 
 {% block body %}
-    <h1>Author index</h1>
+	<h1>{{ title }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Fullname</th>
-                <th>Gender</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for author in authors %}
-            <tr>
-                <td>{{ author.id }}</td>
-                <td>{{ author.firstName }}</td>
-                <td>{{ author.lastName }}</td>
-                <td>{{ author.fullname }}</td>
-                <td>{{ author.gender }}</td>
-                <td>
-                    <a href="{{ path('app_author_show', {'id': author.id}) }}">show</a>
-                    <a href="{{ path('app_author_edit', {'id': author.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Fullname</th>
+				<th>Gender</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for author in authors %}
+				<tr>
+					<td>{{ author.id }}</td>
+					<td>{{ author.firstname }}</td>
+					<td>{{ author.lastname }}</td>
+					<td>{{ author.fullname }}</td>
+					<td>{{ author.gender }}</td>
+					<td>
+						<a href="{{ path('app_author_show', {'id': author.id}) }}">{{ "index.btn.show" | trans({}, domain) }}</a>
+						<a href="{{ path('app_author_edit', {'id': author.id}) }}">{{ "index.btn.edit" | trans({}, domain) }}</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">{{ "index.noRecord" | trans({}, domain) }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_author_new') }}">Create new</a>
+	<a href="{{ path('app_author_new') }}">{{ "index.btn.create" | trans({}, domain) }}</a>
 {% endblock %}
