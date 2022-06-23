@@ -20,6 +20,10 @@ class RegistrationController extends AbstractController
      */
     public function register(GuessLocale $guessLocale, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_profile');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
