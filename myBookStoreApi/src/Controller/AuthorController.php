@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\AuthorRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AuthorController extends AbstractController
 {
@@ -14,10 +14,28 @@ class AuthorController extends AbstractController
      */
     public function index(AuthorRepository $authorRepository): JsonResponse
     {
-
         $authors = $authorRepository->findAll();
+
+        foreach ($authors as $author_key => $author) {
+            $books = $author->getBooks();
+
+            foreach ($books as $book_key => $book) {
+                $books[$book_key] = [
+                    'id' => $book->getId(),
+                    'title' => $book->getTitle(),
+                ];
+            }
+
+            $authors[$author_key] = [
+                'id' => $author->getId(),
+                'firstname' => $author->getFirstname(),
+                'lastname' => $author->getLastname(),
+                'books' => $books,
+            ];
+        }
+
         return $this->json([
-            'message' => $authors,
+            'authors' => $authors
         ]);
     }
 
